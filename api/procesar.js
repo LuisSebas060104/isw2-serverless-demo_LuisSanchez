@@ -13,7 +13,7 @@ export default function handler(req, res) {
   // Valor por defecto
   const nombreFinal = nombre || "Anónimo";
   const timestamp = new Date().toISOString();
-  const resultado = `Nombre procesado: ${String(nombreFinal).trim().toUpperCase()}`;
+  const resultado = `Nombre procesado: ${String(nombreFinal).trim().toLowerCase()}`;
 
   return res.status(200).json({
     ok: true,
