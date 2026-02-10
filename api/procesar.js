@@ -14,10 +14,12 @@ export default function handler(req, res) {
   const nombreFinal = nombre || "Anónimo";
   const timestamp = new Date().toISOString();
   const resultado = `Nombre procesado: ${String(nombreFinal).trim().toUpperCase()}`;
-
+const longitud = String(nombreFinal).trim().length;
+  
   return res.status(200).json({
     ok: true,
     resultado,
     timestamp,
+    longitud
   });
 }
