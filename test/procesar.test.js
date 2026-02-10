@@ -21,5 +21,7 @@ test("procesar convierte el nombre a mayúsculas", () => {
   handler(req, res);
 
   assert.equal(res.statusCode, 200);
-  assert.deepEqual(res.body, { resultado: "Nombre procesado: JUAN" });
+  // Validamos solo el campo 'resultado' para evitar errores por timestamp
+  assert.equal(res.body.resultado, "Nombre procesado: JUAN");
+  assert.equal(res.body.ok, true);
 });
