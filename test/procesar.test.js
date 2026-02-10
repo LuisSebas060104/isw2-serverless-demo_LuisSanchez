@@ -48,3 +48,24 @@ test("procesar maneja nombre ausente", () => {
   assert.ok(res.body.resultado.includes("ANÓNIMO"));
 });
 
+
+test('Debe retornar saludo mayúsculas y longitud (Reto 2)', () => {
+  const req = { query: { nombre: 'Juan' } };
+  
+  // Mismo mock de response de siempre
+  const res = {
+    statusCode: null,
+    body: null,
+    status(code) { this.statusCode = code; return this; },
+    json(payload) { this.body = payload; return this; }
+  };
+
+  handler(req, res);
+
+  assert.equal(res.statusCode, 200);
+  
+  // Validamos los datos específicos (es más seguro que deepEqual)
+  assert.equal(res.body.resultado, "Nombre procesado: JUAN");
+  assert.equal(res.body.longitud, 4); // "Juan" tiene 4 letras
+});
+
