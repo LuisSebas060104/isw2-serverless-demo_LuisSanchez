@@ -25,3 +25,26 @@ test("procesar convierte el nombre a mayúsculas", () => {
   assert.equal(res.body.resultado, "Nombre procesado: JUAN");
   assert.equal(res.body.ok, true);
 });
+
+test("procesar maneja nombre ausente", () => {
+  const req = { query: {} };
+
+  const res = {
+    statusCode: null,
+    body: null,
+    status(code) {
+      this.statusCode = code;
+      return this;
+    },
+    json(payload) {
+      this.body = payload;
+      return this;
+    }
+  };
+
+  handler(req, res);
+
+  assert.equal(res.statusCode, 200);
+  assert.ok(res.body.resultado.includes("ANÓNIMO"));
+});
+
