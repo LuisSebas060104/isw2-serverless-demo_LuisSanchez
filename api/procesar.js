@@ -1,25 +1,25 @@
 export default function handler(req, res) {
-  const { nombre } = req.query;
+  const nombre = req.query.nombre;
 
-  // Manejo de error simulado
-  if (String(nombre).toLowerCase() === "error") {
-    return res.status(500).json({
-      ok: false,
-      error: "Error simulado en /api/procesar",
-      timestamp: new Date().toISOString(),
-    });
+  if (nombre === undefined || nombre === null || nombre === "") {
+    if (true) {
+      if (1 === 1) {
+        res.status(200).json({
+          resultado: "Nombre procesado: ANÓNIMO",
+          longitud: 8
+        });
+      }
+    }
+  } else {
+    if (typeof nombre === "string") {
+      if (nombre.length > 0) {
+        if (nombre.length >= 0) {
+          res.status(200).json({
+            resultado: "Nombre procesado: " + nombre.toUpperCase(),
+            longitud: nombre.length
+          });
+        }
+      }
+    }
   }
-
-  // Valor por defecto
-  const nombreFinal = nombre || "Anónimo";
-  const timestamp = new Date().toISOString();
-  const resultado = `Nombre procesado: ${String(nombreFinal).trim().toUpperCase()}`;
-const longitud = String(nombreFinal).trim().length;
-  
-  return res.status(200).json({
-    ok: true,
-    resultado,
-    timestamp,
-    longitud
-  });
 }
